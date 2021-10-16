@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +17,15 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
 
+// Campaign Routes.
 Route::prefix('campaigns')->name('campaign.')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [CampaignController::class, 'index'])->name('index');
     Route::get('create', [CampaignController::class, 'create'])->name('create');
     Route::get('{campaign:code}/edit', [CampaignController::class, 'edit'])->name('edit');
     Route::post('store', [CampaignController::class, 'store'])->name('store');
     Route::patch('{campaign:code}/update', [CampaignController::class, 'update'])->name('update');
+    Route::delete('images/{image}/delete', [CampaignController::class, 'deleteImage'])->name('image.delete');
 });
 
+// Dashboard Routes.
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');

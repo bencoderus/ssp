@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Campaign extends Model
 {
@@ -13,12 +13,9 @@ class Campaign extends Model
 
     protected $guarded = [];
 
-    protected $dates = ['start_date', 'end_date'];
+    protected $with = ['images'];
 
-    public function images(): HasMany
-    {
-        return $this->hasMany(CampaignImage::class);
-    }
+    protected $dates = ['start_date', 'end_date'];
 
     public static function generateCode(): string
     {
@@ -27,5 +24,10 @@ class Campaign extends Model
         } while (self::query()->where('code', $code)->exists());
 
         return $code;
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(CampaignImage::class);
     }
 }

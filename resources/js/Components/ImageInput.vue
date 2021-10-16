@@ -3,7 +3,7 @@
     <div class="flex w-full items-center justify-center bg-grey-lighter">
       <label
         class="
-          w-64
+          w-full
           flex flex-col
           items-center
           px-4
@@ -15,8 +15,7 @@
           tracking-wide
           border border-blue
           cursor-pointer
-          hover:bg-gray-800
-          hover:text-white
+          hover:bg-gray-800 hover:text-white
         "
       >
         <svg

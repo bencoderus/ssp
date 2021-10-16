@@ -1,9 +1,9 @@
 <template>
-  <Link :href="routeName">
-    <button
-      class="
+    <Link :href="path">
+        <button
+            class="
         py-12
-        bg-gray-800
+        bg-gray-700
         rounded-md
         w-64
         font-semibold
@@ -13,22 +13,22 @@
         transition
         cursor-pointer
       "
-      type="button"
-    >
-      {{ title }}
-    </button>
-  </Link>
+            type="button"
+        >
+            {{ title }}
+        </button>
+    </Link>
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default {
-  name: 'Menu',
-  components: {
-    Link,
-  },
-  props: ['title', 'routeName'],
+    name: 'Menu',
+    components: {
+        Link,
+    },
+    props: ['title', 'path'],
 };
 </script>
 
