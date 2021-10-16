@@ -1,27 +1,27 @@
 <template>
-  <header class="bg-purple-700 sticky top-0 pl-8 py-6 text-white w-screen">
-    <url-link :href="route('dashboard')">
-      <span class="font-bold">SSP</span>
-    </url-link>
-    <span class="float-right mr-8 text-white">
-      <div class="pb-2" v-show="$page.props.user.name">
+    <header class="bg-gray-700 sticky top-0 pl-8 py-6 text-white w-screen">
+        <url-link :href="route('dashboard')">
+            <span class="font-bold">SSP</span>
+        </url-link>
+        <span class="float-right mr-8 text-white">
+      <div v-show="$page.props.user.name" class="pb-2">
         <div class="dropdown inline-block relative">
           <span
-            class="text-white font-semibold pb-4 px-4 inline-flex items-center"
+              class="text-white font-semibold pb-4 px-4 inline-flex items-center"
           >
             <span class="mr-1">{{ $page.props.user.name }}</span>
             <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+                class="fill-current h-4 w-4"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
               />
             </svg>
           </span>
           <ul
-            class="
+              class="
               dropdown-menu
               w-32
               shadow-md
@@ -34,7 +34,7 @@
             <li class="">
               <url-link href="#">
                 <span
-                  class="
+                    class="
                     text-sm
                     bg-white
                     hover:bg-gray-400
@@ -43,15 +43,15 @@
                     block
                     whitespace-no-wrap
                   "
-                  href="#"
-                  >Home</span
+                    href="#"
+                >Home</span
                 >
               </url-link>
             </li>
             <li class="">
               <url-link href="#">
                 <span
-                  class="
+                    class="
                     bg-white
                     text-sm
                     hover:bg-gray-400
@@ -60,15 +60,15 @@
                     block
                     whitespace-no-wrap
                   "
-                  href="#"
-                  >Articles</span
+                    href="#"
+                >Articles</span
                 >
               </url-link>
             </li>
             <li class="">
               <url-link href="#">
                 <span
-                  class="
+                    class="
                     text-sm
                     bg-white
                     hover:bg-gray-400
@@ -77,15 +77,15 @@
                     block
                     whitespace-no-wrap
                   "
-                  href="#"
-                  >Projects</span
+                    href="#"
+                >Projects</span
                 >
               </url-link>
             </li>
 
             <li class="">
               <a
-                class="
+                  class="
                   text-sm
                   bg-white
                   hover:bg-gray-400
@@ -94,25 +94,25 @@
                   block
                   whitespace-no-wrap
                 "
-                @click.prevent="logout()"
-                href="/logout"
-                >Logout</a
+                  href="/logout"
+                  @click.prevent="logout()"
+              >Logout</a
               >
             </li>
           </ul>
         </div>
       </div>
     </span>
-  </header>
+    </header>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import {defineComponent} from 'vue';
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
-  components: {
-    UrlLink: Link,
-  },
+    components: {
+        UrlLink: Link,
+    },
 });
 </script>

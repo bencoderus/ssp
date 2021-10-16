@@ -18,7 +18,7 @@ class FileService
      */
     public static function deleteFile(string $path, string $filename): bool
     {
-        $fullPath = $path."/".$filename;
+        $fullPath = "{$path}/{$filename}";
         $exists = Storage::exists($fullPath);
 
         if ($exists) {
@@ -41,7 +41,7 @@ class FileService
     public static function deleteMultipleFiles(string $path, object $filenames): bool
     {
         foreach ($filenames as $filename) {
-            $fullPath = $path."/".$filename;
+            $fullPath = "{$path}/{$filename}";
             $exists = Storage::exists($fullPath);
 
             if ($exists) {
@@ -78,6 +78,6 @@ class FileService
      */
     public static function generateFileName(string $extension): string
     {
-        return Str::random(30).".".$extension;
+        return Str::random(30) . "." . $extension;
     }
 }

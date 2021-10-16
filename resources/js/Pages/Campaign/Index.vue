@@ -12,14 +12,13 @@
             </url-link>
         </div>
         <div v-else class="bg-white shadow overflow-x-auto">
-            <table class="w-full whitespace-nowrap text-md">
+            <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold bg-gray-700 text-white">
                     <th class="px-6 pt-6 pb-4">Name</th>
                     <th class="px-6 pt-6 pb-4">Daily budget</th>
                     <th class="px-6 pt-6 pb-4">Total budget</th>
-                    <th class="px-6 pt-6 pb-4">Start Date</th>
-                    <th class="px-6 pt-6 pb-4">End Date</th>
                     <th class="px-6 pt-6 pb-4">Created At</th>
+                    <th class="px-6 pt-6 pb-4">Actions</th>
                 </tr>
                 <tr
                     v-for="campaign in campaigns.data"
@@ -58,26 +57,13 @@
                             class="px-6 py-4 flex items-center"
                             tabindex="-1"
                         >
-                            {{ campaign.start_date }}
-                        </url-link>
-                    </td>
-                    <td class="border-t">
-                        <url-link
-                            :href="route('campaign.edit', campaign.code)"
-                            class="px-6 py-4 flex items-center"
-                            tabindex="-1"
-                        >
-                            {{ campaign.end_date }}
-                        </url-link>
-                    </td>
-                    <td class="border-t">
-                        <url-link
-                            :href="route('campaign.edit', campaign.code)"
-                            class="px-6 py-4 flex items-center"
-                            tabindex="-1"
-                        >
                             {{ campaign.created_at }}
                         </url-link>
+                    </td>
+                    <td class="border-t">
+                        <button class="bg-purple-700 text-white p-2 text-sm rounded-md" type="button"
+                                @click="showPreview(campaign.id)">View creatives
+                        </button>
                     </td>
                 </tr>
                 <tr v-if="campaigns.length === 0">
@@ -86,31 +72,92 @@
             </table>
         </div>
 
-        <pagination :links="campaigns.links" class="mt-6"/>
+        <paginator :links="campaigns.links" class="mt-6"/>
     </base-layout>
+
+
+    <jet-dialog-modal :show="modalIsOpen" @close="closeModal">
+        <template #title>
+            {{ campaign.name || "" }}
+        </template>
+
+        <template #content>
+            <div v-if="campaign.images.length === 0">
+                <p>Sorry there are no images to render at the moment.</p>
+            </div>
+            <carousel v-else :autoplay="4000" :wrap-around="true">
+                <slide v-for="(image, index) in campaign.images" :key="index">
+                    <div class="carousel__item text-center w-64">
+                        <img
+                            :alt="image.title"
+                            :src="image.path"
+                        />
+                    </div>
+                </slide>
+                <template #addons>
+                    <navigation/>
+                    <pagination/>
+                </template>
+            </carousel>
+        </template>
+        <template #footer>
+            <div>
+                <button class="bg-purple-700 text-white p-2 rounded-md" @click="closeModal">Close</button>
+            </div>
+        </template>
+    </jet-dialog-modal>
 </template>
 
 <script>
 import {defineComponent} from 'vue';
+import {Link} from '@inertiajs/inertia-vue3';
+import 'vue3-carousel/dist/carousel.css';
+import {Carousel, Navigation, Pagination, Slide} from 'vue3-carousel';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import AlertMessage from '@/Components/AlertMessage.vue';
-import Pagination from '@/Components/Pagination.vue';
-import {Link} from '@inertiajs/inertia-vue3';
+import Paginator from '@/Components/Pagination.vue';
+import JetDialogModal from '@/Components/ImageModal.vue'
+
 
 export default defineComponent({
     components: {
         AppLayout,
+        JetDialogModal,
         BaseLayout,
-        Pagination,
+        Paginator,
         AlertMessage,
         UrlLink: Link,
+        Carousel,
+        Navigation,
+        Pagination,
+        Slide
     },
     props: ['campaigns'],
     data() {
         return {
             title: 'Campaigns',
+            modalIsOpen: false,
+            modalCampaignId: null,
+            campaign: null,
         };
     },
+
+    methods: {
+        showPreview(id) {
+            this.modalIsOpen = true;
+            this.modalCampaignId = id;
+            this.campaign = this.campaigns.data.find((campaign) => campaign.id === id);
+
+        },
+        closeModal() {
+            this.modalIsOpen = false;
+        }
+    }
 });
 </script>
+<style>
+.carousel__icon {
+    fill: #000 !important;
+}
+</style>

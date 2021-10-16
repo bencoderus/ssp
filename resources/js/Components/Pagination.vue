@@ -1,10 +1,10 @@
 <template>
-  <div v-if="links.length > 3">
-    <div class="flex flex-wrap -mb-1">
-      <template v-for="(link, key) in links" :key="key">
-        <div
-          v-if="link.url === null"
-          class="
+    <div v-if="links.length > 3">
+        <div class="flex flex-wrap -mb-1">
+            <template v-for="(link, key) in links" :key="key">
+                <div
+                    v-if="link.url === null"
+                    class="
             mr-1
             mb-1
             px-4
@@ -15,11 +15,13 @@
             border
             rounded
           "
-          v-html="link.label"
-        />
-        <url-link
-          v-else
-          class="
+                    v-html="link.label"
+                />
+                <url-link
+                    v-else
+                    :class="{ 'bg-white': link.active }"
+                    :href="link.url"
+                    class="
             mr-1
             mb-1
             px-4
@@ -32,25 +34,21 @@
             focus:border-indigo-500
             focus:text-indigo-500
           "
-          :class="{ 'bg-white': link.active }"
-          :href="link.url"
-          v-html="link.label"
-        />
-      </template>
+                    v-html="link.label"
+                />
+            </template>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import { defineComponent } from '@vue/runtime-core';
-import { Link } from '@inertiajs/inertia-vue3';
+import {defineComponent} from '@vue/runtime-core';
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
-  props: {
-    links: Array,
-  },
-  components: {
-    UrlLink: Link,
-  },
+    props: ['links'],
+    components: {
+        UrlLink: Link,
+    },
 });
 </script>
