@@ -13,7 +13,7 @@ class UpdatePasswordTest extends TestCase
 
     public function test_password_can_be_updated()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = $this->login();
 
         $response = $this->put('/user/password', [
             'current_password' => 'password',
@@ -26,7 +26,7 @@ class UpdatePasswordTest extends TestCase
 
     public function test_current_password_must_be_correct()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = $this->login();
 
         $response = $this->put('/user/password', [
             'current_password' => 'wrong-password',
@@ -41,7 +41,7 @@ class UpdatePasswordTest extends TestCase
 
     public function test_new_passwords_must_match()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = $this->login();
 
         $response = $this->put('/user/password', [
             'current_password' => 'password',

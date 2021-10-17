@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Campaign\CreateCampaignRequest;
-use App\Http\Resources\CampaignResource;
+use App\Http\Resources\Campaign\CampaignResource;
 use App\Models\Campaign;
 use App\Models\CampaignImage;
 use App\Services\FileService;
