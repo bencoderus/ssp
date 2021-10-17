@@ -1,0 +1,71 @@
+version: '3.6'
+services:
+  ssp_app:
+    container_name: ssp_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./docker.env
+    volumes:
+      - ssp_app_data:/data
+    ports:
+      - '5017:80'
+    depends_on:
+      - ssp_db
+      - ssp_redis
+    networks:
+      - ssp_connect
+
+  ssp_cron:
+    container_name: ssp_cron
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./docker.env
+    environment:
+      - CONTAINER_ROLE=scheduler
+    depends_on:
+      - ssp_db
+      - ssp_redis
+    networks:
+      - ssp_connect
+
+  # MySQL and document data store
+  ssp_db:
+    container_name: ssp_databasse
+    image: mysql:5.7
+    ports:
+      - '5018:3306'
+    volumes:
+      - ssp_db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: ssp_database
+    networks:
+      - ssp_connect
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 20s
+      retries: 10
+
+  # Redis for messaging queue
+  ssp_redis:
+    container_name: ssp_redis
+    image: redis:alpine
+    volumes:
+      - ssp_redis_data:/data
+    environment:
+      REDIS_PASSWORD: NULL
+    networks:
+      - ssp_connect
+
+volumes:
+  ssp_app_data:
+  ssp_db_data:
+  ssp_redis_data:
+
+networks:
+  ssp_connect:

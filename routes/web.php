@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
 // Campaign Routes.
 Route::prefix('campaigns')->name('campaign.')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [CampaignController::class, 'index'])->name('index');
@@ -28,4 +26,5 @@ Route::prefix('campaigns')->name('campaign.')->middleware(['auth:sanctum', 'veri
 });
 
 // Dashboard Routes.
+Route::get('/', [HomeController::class, 'index']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
