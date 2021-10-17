@@ -1,6 +1,6 @@
 <template>
     <base-layout :title="title">
-        <form id="create-form" class="flex-col space-y-5" @submit.prevent="save">
+        <form id="edit-form" class="flex-col space-y-5" @submit.prevent="save">
             <section>
                 <jet-label for="name" value="Name"/>
                 <jet-input
@@ -175,7 +175,7 @@ export default defineComponent({
         },
 
         save() {
-            const form = document.querySelector('#create-form');
+            const form = document.querySelector('#edit-form');
 
             this.$inertia.post(route('campaign.update', this.campaign.code), new FormData(form), {
                 preserveState: true,

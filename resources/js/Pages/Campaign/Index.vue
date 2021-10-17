@@ -11,6 +11,7 @@
                 </button>
             </url-link>
         </div>
+
         <div v-else class="bg-white shadow overflow-x-auto">
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold bg-gray-700 text-white">
@@ -39,7 +40,7 @@
                             class="px-6 py-4 flex items-center"
                             tabindex="-1"
                         >
-                            {{ campaign.daily_budget }}
+                            {{ campaign.daily_budget.toLocaleString() }}
                         </url-link>
                     </td>
                     <td class="border-t">
@@ -48,7 +49,7 @@
                             class="px-6 py-4 flex items-center"
                             tabindex="-1"
                         >
-                            {{ campaign.total_budget }}
+                            {{ campaign.total_budget.toLocaleString() }}
                         </url-link>
                     </td>
                     <td class="border-t">
@@ -57,13 +58,14 @@
                             class="px-6 py-4 flex items-center"
                             tabindex="-1"
                         >
-                            {{ campaign.created_at }}
+                            {{ formatDateString(campaign.created_at) }}
                         </url-link>
                     </td>
                     <td class="border-t">
-                        <button class="bg-purple-700 text-white p-2 text-sm rounded-md" type="button"
-                                @click="showPreview(campaign.id)">View creatives
-                        </button>
+                        <jet-button class="mx-1" @click="showPreview(campaign.id)">View</jet-button>
+                        <url-link :href="route('campaign.edit', campaign.code)" class="mx-1">
+                            <jet-button type="button">Edit</jet-button>
+                        </url-link>
                     </td>
                 </tr>
                 <tr v-if="campaigns.length === 0">
@@ -75,8 +77,7 @@
         <paginator :links="campaigns.links" class="mt-6"/>
     </base-layout>
 
-
-    <jet-dialog-modal :show="modalIsOpen" @close="closeModal">
+    <image-modal :show="modalIsOpen" @close="closeModal">
         <template #title>
             {{ campaign.name || "" }}
         </template>
@@ -102,10 +103,10 @@
         </template>
         <template #footer>
             <div>
-                <button class="bg-purple-700 text-white p-2 rounded-md" @click="closeModal">Close</button>
+                <jet-button @click="closeModal">Close</jet-button>
             </div>
         </template>
-    </jet-dialog-modal>
+    </image-modal>
 </template>
 
 <script>
@@ -117,13 +118,14 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import AlertMessage from '@/Components/AlertMessage.vue';
 import Paginator from '@/Components/Pagination.vue';
-import JetDialogModal from '@/Components/ImageModal.vue'
-
+import JetButton from '@/Jetstream/Button.vue';
+import {formatDate} from "../../Utils/helpers";
+import ImageModal from "../../Components/ImageModal";
 
 export default defineComponent({
     components: {
         AppLayout,
-        JetDialogModal,
+        ImageModal,
         BaseLayout,
         Paginator,
         AlertMessage,
@@ -131,14 +133,14 @@ export default defineComponent({
         Carousel,
         Navigation,
         Pagination,
-        Slide
+        Slide,
+        JetButton
     },
     props: ['campaigns'],
     data() {
         return {
             title: 'Campaigns',
             modalIsOpen: false,
-            modalCampaignId: null,
             campaign: null,
         };
     },
@@ -146,9 +148,10 @@ export default defineComponent({
     methods: {
         showPreview(id) {
             this.modalIsOpen = true;
-            this.modalCampaignId = id;
             this.campaign = this.campaigns.data.find((campaign) => campaign.id === id);
-
+        },
+        formatDateString(val) {
+            return formatDate(val);
         },
         closeModal() {
             this.modalIsOpen = false;
@@ -156,6 +159,7 @@ export default defineComponent({
     }
 });
 </script>
+
 <style>
 .carousel__icon {
     fill: #000 !important;

@@ -11,7 +11,6 @@
         bg-gray-300
         text-sm
         shadow-md
-        font-bold
         h-screen
         text-gray-900
         p-8

@@ -22,15 +22,13 @@
 
 <script>
 import {Link} from '@inertiajs/inertia-vue3';
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
     name: 'Menu',
     components: {
         Link,
     },
     props: ['title', 'path'],
-};
+});
 </script>
-
-<style>
-</style>

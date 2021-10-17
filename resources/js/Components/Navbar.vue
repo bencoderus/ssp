@@ -31,8 +31,8 @@
               pt-1
             "
           >
-            <li class="">
-              <url-link href="#">
+            <li>
+              <url-link :href="route('dashboard')">
                 <span
                     class="
                     text-sm
@@ -43,13 +43,12 @@
                     block
                     whitespace-no-wrap
                   "
-                    href="#"
                 >Home</span
                 >
               </url-link>
             </li>
-            <li class="">
-              <url-link href="#">
+            <li>
+              <url-link :href="route('campaign.index')">
                 <span
                     class="
                     bg-white
@@ -60,13 +59,12 @@
                     block
                     whitespace-no-wrap
                   "
-                    href="#"
-                >Articles</span
+                >Campaigns</span
                 >
               </url-link>
             </li>
-            <li class="">
-              <url-link href="#">
+            <li>
+              <url-link href="logout" @click="logout">
                 <span
                     class="
                     text-sm
@@ -77,27 +75,9 @@
                     block
                     whitespace-no-wrap
                   "
-                    href="#"
-                >Projects</span
+                >Logout</span
                 >
               </url-link>
-            </li>
-
-            <li class="">
-              <a
-                  class="
-                  text-sm
-                  bg-white
-                  hover:bg-gray-400
-                  py-2
-                  px-8
-                  block
-                  whitespace-no-wrap
-                "
-                  href="/logout"
-                  @click.prevent="logout()"
-              >Logout</a
-              >
             </li>
           </ul>
         </div>
@@ -114,5 +94,16 @@ export default defineComponent({
     components: {
         UrlLink: Link,
     },
+    methods: {
+        logout() {
+            this.$inertia.post(route('logout'));
+        },
+    }
 });
 </script>
+
+<style>
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+</style>

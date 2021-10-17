@@ -111,6 +111,7 @@
 
 <script>
 import {defineComponent} from 'vue';
+import {Link} from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import JetButton from '@/Jetstream/Button.vue';
@@ -119,7 +120,6 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetInputError from '@/Jetstream/InputError.vue';
 import ImageInput from '@/Components/ImageInput.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
-import {Link} from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
     components: {

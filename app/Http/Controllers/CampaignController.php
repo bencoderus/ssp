@@ -147,6 +147,6 @@ class CampaignController extends Controller
             $this->uploadMultiple($request->file('images'), $campaign);
         }
 
-        return redirect()->route('campaign.index')->with('success', __('constants.unauthorized'));
+        return redirect()->route('campaign.index')->with('success', "Campaign updated successfully");
     }
 }
