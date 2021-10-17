@@ -9,13 +9,13 @@ if [[ $ROLE == "app" ]]
 then
 echo "running as app"
 php artisan config:clear
-php artisan migrate --force --no-interaction
 php artisan clear-compiled
 php artisan auth:clear-resets
 php artisan optimize:clear
 php artisan config:cache
 php artisan view:cache
 php artisan route:cache
+php artisan migrate --force --no-interaction
 php artisan db:seed
 find * -type f -exec chmod 644 {} \;
 find * -type d -exec chmod 755 {} \;
