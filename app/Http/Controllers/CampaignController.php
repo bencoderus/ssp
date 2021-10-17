@@ -50,8 +50,8 @@ class CampaignController extends Controller
      */
     public function edit(Campaign $campaign)
     {
-        if (Auth::id() !== $campaign->user_id) {
-            return redirect()->back()->with('error', __('constants.unauthorized'));
+        if (Auth::id() != $campaign->user_id) {
+            return redirect()->route('campaign.index')->with('error', __('constants.unauthorized'));
         }
 
         $campaignResource = new CampaignResource($campaign);
@@ -111,7 +111,7 @@ class CampaignController extends Controller
      */
     public function deleteImage(CampaignImage $image): RedirectResponse
     {
-        if (Auth::id() !== $image->campaign->user_id) {
+        if (Auth::id() != $image->campaign->user_id) {
             return redirect()->back()->with('error', __('constants.unauthorized'));
         }
 
@@ -131,7 +131,7 @@ class CampaignController extends Controller
      */
     public function update(Campaign $campaign, Request $request): RedirectResponse
     {
-        if (Auth::id() !== $campaign->user_id) {
+        if (Auth::id() != $campaign->user_id) {
             return redirect()->back()->with('error', __('constants.unauthorized'));
         }
 
@@ -147,6 +147,6 @@ class CampaignController extends Controller
             $this->uploadMultiple($request->file('images'), $campaign);
         }
 
-        return redirect()->route('campaign.index')->with('success', "Campaign updated successfully");
+        return redirect()->route('campaign.index')->with('success', "Campaign updated successfully.");
     }
 }

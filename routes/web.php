@@ -26,5 +26,5 @@ Route::prefix('campaigns')->name('campaign.')->middleware(['auth:sanctum', 'veri
 });
 
 // Dashboard Routes.
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
