@@ -12,11 +12,9 @@ php artisan config:clear
 php artisan clear-compiled
 php artisan auth:clear-resets
 php artisan optimize:clear
-php artisan config:cache
-php artisan view:cache
-php artisan route:cache
 php artisan migrate --force --no-interaction
 php artisan db:seed
+php artisan optimize
 find * -type f -exec chmod 644 {} \;
 find * -type d -exec chmod 755 {} \;
 chgrp -R www-data /var/www/storage
