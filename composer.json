@@ -39,7 +39,7 @@
     }
   },
   "scripts": {
-    "test": "php artisan config:clear --env=testing && php artisan test --env=testing",
+    "test": "php artisan config:clear && php artisan test --env=testing",
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover --ansi"
