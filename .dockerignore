@@ -1,6 +1,7 @@
 .gitignore
 .git
 docker-compose.yml
+/vendor
 /node_modules
 /public/hot
 /public/storage
