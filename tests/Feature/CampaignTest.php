@@ -6,13 +6,9 @@ use Tests\TestCase;
 use App\Models\Campaign;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CampaignTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
-
     public function test_a_user_can_view_all_his_campaigns()
     {
         $this->login();

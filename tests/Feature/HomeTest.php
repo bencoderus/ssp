@@ -2,14 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
-
     public function test_logged_in_user_can_view_dashboard()
     {
         $this->login();

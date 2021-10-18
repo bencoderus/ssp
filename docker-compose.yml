@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     env_file:
       - ./docker.env
+    volumes:
+      - ssp_app_data:/var/www
     ports:
       - '7000:80'
     depends_on:
@@ -61,6 +63,7 @@ services:
       - ssp_connect
 
 volumes:
+  ssp_app_data:
   ssp_db_data:
   ssp_redis_data:
 

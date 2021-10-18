@@ -20,6 +20,7 @@ find * -type d -exec chmod 755 {} \;
 chgrp -R www-data /var/www/storage
 chmod -R ug+rwx /var/www/storage
 chmod -R ug+rwx /var/www/bootstrap/cache
+cp .env.testing.example .env.testing
 php artisan storage:link
 /usr/bin/supervisord
 

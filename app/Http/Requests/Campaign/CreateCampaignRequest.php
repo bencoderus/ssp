@@ -28,7 +28,7 @@ class CreateCampaignRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'start_date' => ['required', "after_or_equal:{$today}"],
-            'end_date' => ['required', "after_or_equal:{$today}"],
+            'end_date' => ['required', "after_or_equal:{$today}", "after_or_equal:start_date"],
             'total_budget' => ['required', 'numeric', 'min:1', 'gte:daily_budget'],
             'daily_budget' => ['required', 'numeric', 'min:1', 'lte:total_budget'],
             'images' => ['required', 'array', 'min:1'],
