@@ -30,10 +30,13 @@ Building an SSP that lets you create and manage your campaigns. App was built us
 
 ## Login using credentials
 
-Email: me@biduwe.com
-Password: password
+- Email: me@biduwe.com
+- Password: password
+
+Testing the application in a Docker container
+docker exec -it {containerID} bash.
+composer test
 
 Testing the application
-
-- php artisan config:clear
-- php artisan test.
+Follow the default installation guide.
+Run composer test.
