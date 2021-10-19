@@ -127,7 +127,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-import AppLayout from '@/Layouts/AppLayout.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import JetButton from '@/Jetstream/Button.vue';
 import JetInput from '@/Jetstream/Input.vue';
@@ -140,7 +139,6 @@ import { formatInputDate } from '@/Utils/helpers';
 
 export default defineComponent({
   components: {
-    AppLayout,
     BaseLayout,
     ImageInput,
     JetButton,

@@ -21,13 +21,11 @@
 
 <script>
 import { defineComponent } from 'vue';
-import AppLayout from '@/Layouts/AppLayout.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import DashboardMenu from '@/Components/Dashboard/Menu';
 
 export default defineComponent({
   components: {
-    AppLayout,
     BaseLayout,
     DashboardMenu,
   },
