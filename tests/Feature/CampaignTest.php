@@ -104,6 +104,8 @@ class CampaignTest extends TestCase
             'total_budget' => $payload['total_budget'],
             'user_id' => $user->id,
         ]);
+
+        $this->assertDatabaseCount('campaign_images', 2);
     }
 
     public function test_a_user_can_delete_a_campaign_image()
@@ -140,8 +142,8 @@ class CampaignTest extends TestCase
         Storage::fake('photos');
 
         $files = [
-            UploadedFile::fake()->image('banner.jpg', 1000, 1000)->size(100),
-            UploadedFile::fake()->image('flyer.jpg', 1000, 1000)->size(100),
+            UploadedFile::fake()->image('photo1.jpg', 1000, 1000)->size(100),
+            UploadedFile::fake()->image('photo2.jpg', 1000, 1000)->size(100),
         ];
 
         return [
