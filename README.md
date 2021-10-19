@@ -33,10 +33,12 @@ Building an SSP that lets you create and manage your campaigns. App was built us
 - Email: me@biduwe.com
 - Password: password
 
-Testing the application in a Docker container
-docker exec -it {containerID} bash.
-composer test
+#### Testing the application in a Docker container
 
-Testing the application
-Follow the default installation guide.
-Run composer test.
+- docker exec -it {containerID} bash.
+- composer test
+
+#### Testing the application
+
+- Follow the default installation guide.
+- Run composer test.
