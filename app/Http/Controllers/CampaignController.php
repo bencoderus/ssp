@@ -118,7 +118,7 @@ class CampaignController extends Controller
         FileService::deleteFile(CampaignImage::IMAGE_PATH, $image->title);
         $image->delete();
 
-        return redirect()->back()->with('success', 'Image removed successfully');
+        return redirect()->back()->with('success', 'Image removed successfully.');
     }
 
     /**

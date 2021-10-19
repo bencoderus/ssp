@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Campaign;
+use App\Models\CampaignImage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -104,6 +105,35 @@ class CampaignTest extends TestCase
             'user_id' => $user->id,
         ]);
     }
+
+    public function test_a_user_can_delete_a_campaign_image()
+    {
+        $user = $this->login();
+        $campaign = Campaign::factory()->create(['user_id' => $user->id]);
+        $image = CampaignImage::factory()->create(['campaign_id' => $campaign->id]);
+
+        $response = $this->delete(route('campaign.image.delete', ['image' => $image->id]));
+
+        $response->assertRedirect()
+            ->assertSessionHas('success', 'Image removed successfully.');
+
+        $this->assertDatabaseMissing('campaign_images', [
+            'title' => $image->title,
+            'id' => $image->id
+        ]);
+    }
+
+    public function test_a_user_can_not_delete_a_campaign_image_of_another_user()
+    {
+        $user = $this->login();
+        $image = CampaignImage::factory()->create();
+
+        $response = $this->delete(route('campaign.image.delete', ['image' => $image->id]));
+
+        $response->assertRedirect()
+            ->assertSessionHas('error', __('constants.unauthorized'));
+    }
+
 
     private function payload(): array
     {
