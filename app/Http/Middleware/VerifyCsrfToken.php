@@ -11,7 +11,7 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [];
+    protected $except = ['*'];
 
     /**
      * Get the CSRF token from the request.
