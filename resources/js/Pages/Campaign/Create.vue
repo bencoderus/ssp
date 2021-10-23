@@ -84,6 +84,7 @@
       </section>
 
       <section class="text-center">
+        <input type="hidden" name="_token" value="$page.props.csrf_token" />
         <jet-button
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"

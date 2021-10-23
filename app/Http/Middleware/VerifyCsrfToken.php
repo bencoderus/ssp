@@ -21,9 +21,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected function getTokenFromRequest($request)
     {
-        $token = $request->input('_token') ?: $request->header('X-CSRF-TOKEN') ?: $request->cookie('XSRF-TOKEN');
-
-        dd($token, $request->session()->token());
+        $token = $request->input('_token') ?: $request->header('X-CSRF-TOKEN');
 
         return $token;
     }
