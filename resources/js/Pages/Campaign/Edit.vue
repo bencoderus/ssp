@@ -99,6 +99,7 @@
 
       <section class="text-center">
         <input name="_method" type="hidden" value="patch" />
+        <input type="hidden" name="_token" value="$page.props.csrf_token" />
 
         <jet-button
           :class="{ 'opacity-25': form.processing }"
