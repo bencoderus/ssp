@@ -96,9 +96,7 @@ export default defineComponent({
   },
   methods: {
     logout() {
-      this.$inertia.post(route('logout'), {
-        _token: this.$page.props.csrf_token,
-      });
+      this.$inertia.post(route('logout'));
     },
   },
 });

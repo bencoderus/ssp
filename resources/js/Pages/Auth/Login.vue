@@ -106,7 +106,6 @@ export default defineComponent({
       this.form
         .transform((data) => ({
           ...data,
-          _token: this.$page.props.csrf_token,
           remember: this.form.remember ? 'on' : '',
         }))
         .post(this.route('login'), {
