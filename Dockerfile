@@ -23,10 +23,12 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install \
     opcache \
     pdo_mysql \
-    soap
+    soap \
+    -j$(nproc) gd
 
 RUN pecl install -o -f redis \
     && rm -rf /tmp/pear \
