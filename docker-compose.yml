@@ -17,21 +17,6 @@ services:
     networks:
       - ssp_connect
 
-  ssp_cron:
-    container_name: ssp_cron
-    build:
-      context: .
-      dockerfile: Dockerfile
-    env_file:
-      - ./docker.env
-    environment:
-      - CONTAINER_ROLE=scheduler
-    depends_on:
-      - ssp_db
-      - ssp_redis
-    networks:
-      - ssp_connect
-
   # MySQL and document data store
   ssp_db:
     container_name: ssp_databasse
